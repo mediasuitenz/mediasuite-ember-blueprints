@@ -1,0 +1,19 @@
+[
+  {
+    "key": "name",
+    "type": "text",
+    "label": "Name"
+  },
+  {
+    "key": "age",
+    "type": "number"
+  },
+  {
+    "key": "permission",
+    "type": "belongsTo",
+    "options": "permissions",
+    "relatedModel": "permission",
+    "valueKey": "id",
+    "labelName": "name"
+  }
+]

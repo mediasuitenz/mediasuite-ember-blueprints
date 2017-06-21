@@ -1,0 +1,42 @@
+<%
+components.forEach(function(component) {
+  switch (component.type) {
+    case 'text': %>
+      {{mediasuite-input
+        value=<%=camelizedModel%>.<%=component.key%>
+        type='text'
+        label='<%=component.label || component.key%>'
+        update=(action (mut <%=camelizedModel%>.<%=component.key%>))
+        errors=<%=camelizedModel%>.errors.<%=component.key%>
+      }}
+      <%
+      break;
+
+    case 'number': %>
+      {{mediasuite-input
+        value=<%=camelizedModel%>.<%=component.key%>
+        type='number'
+        label='<%=component.label || component.key%>'
+        update=(action (mut <%=camelizedModel%>.<%=component.key%>))
+        errors=<%=camelizedModel%>.errors.<%=component.key%>
+      }}
+      <%
+      break;
+
+    case 'belongsTo': %>
+      {{mediasuite-select-box
+        options=<%=component.options%>
+        optionValuePath='<%=component.valueKey%>'
+        optionLabelPath='<%=component.labelName%>'
+        value=<%=component.key%>
+        label='<%=component.label || component.key%>'
+        prompt=true
+        promptIsSelectable=true
+        errors=<%=camelizedModel%>.errors.<%=component.key%>Id
+        mutUpdate=true
+        mutField=<%=camelizedModel%>.<%=component.key%>
+      }}
+    <%
+  }
+})
+%>

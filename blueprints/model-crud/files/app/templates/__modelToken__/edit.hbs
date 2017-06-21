@@ -1,0 +1,8 @@
+{{<%=modelToken%>/edit-<%=modelToken%>
+  <%=camelizedModel%>=model.<%=camelizedModel%>
+<%components.filter(component => component.type === 'belongsTo').forEach(component => {%>
+  <%=component.options%>=<%=component.options%>
+<%})%>
+  save=(route-action 'save')
+  cancel=(route-action 'cancel')
+}}
