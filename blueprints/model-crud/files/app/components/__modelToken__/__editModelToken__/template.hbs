@@ -1,11 +1,21 @@
+<div class="heading-cols margin-btm-20">
+  <h2 class="heading-left">
+    <!-- todo-crud: consider changing the 'id' property to whatever makes sense for the user -->
+    {{if <%=camelizedModel%>.isNew 'Add <%=humanModel%>' (concat 'Edit <%=humanModel%> #' <%=camelizedModel%>.id)}}
+  </h2>
+</div>
+<section>
 <%
-components.forEach(function(component) {
-  switch (component.type) {
+  <!-- todo-crud: Your layout will vary -->
+components.forEach(function(component) { %>
+  <div class="row">
+    <div class="col-1-1 form-field">
+  <%switch (component.type) {
     case 'text': %>
       {{mediasuite-input
         value=<%=camelizedModel%>.<%=component.key%>
         type='text'
-        label='<%=component.label || component.key%>'
+        label='<%=S(component.label || component.key).humanize().capitalize().s%>'
         update=(action (mut <%=camelizedModel%>.<%=component.key%>))
         errors=<%=camelizedModel%>.errors.<%=component.key%>
       }}
@@ -16,7 +26,7 @@ components.forEach(function(component) {
       {{mediasuite-input
         value=<%=camelizedModel%>.<%=component.key%>
         type='number'
-        label='<%=component.label || component.key%>'
+        label='<%=S(component.label || component.key).humanize().capitalize().s%>'
         update=(action (mut <%=camelizedModel%>.<%=component.key%>))
         errors=<%=camelizedModel%>.errors.<%=component.key%>
       }}
@@ -29,7 +39,7 @@ components.forEach(function(component) {
         optionValuePath='<%=component.valueKey%>'
         optionLabelPath='<%=component.labelName%>'
         value=<%=component.key%>
-        label='<%=component.label || component.key%>'
+        label='<%=S(component.label || component.key).humanize().capitalize().s%>'
         prompt=true
         promptIsSelectable=true
         errors=<%=camelizedModel%>.errors.<%=component.key%>Id
@@ -37,6 +47,9 @@ components.forEach(function(component) {
         mutField=<%=camelizedModel%>.<%=component.key%>
       }}
     <%
-  }
-})
+  }%>
+    </div>
+  </div>
+<%})
 %>
+</section>

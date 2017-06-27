@@ -10,45 +10,7 @@ const CONSOLE = Object.freeze({
 module.exports = {
   description: 'Adds crud components for the provided model',
 
-  //todo: write something about this
-  availableOptions: [
-    {
-      name: 'model',
-      type: String,
-      default: ''
-    }
-  ],
-
-  // beforeInstall: function (options) {
-  //   console.log('before install')
-  //   // todo: Add a dasherized version of the model name to the options if possible
-  //   // options.entity.dasherized = 'test-name'
-  //   console.warn(`${CONSOLE.WARN}Warning: if model name "${options.entity.name}" is not dasherised, this will fail`)
-  //
-  //   // todo: check a model and config actually exists
-  //   return this._super(...arguments)
-  // },
-  // beforeUninstall: function() {
-  //   console.log('before uninstall')
-  //   return this._super(...arguments)
-  // },
-  // afterUninstall: function () {
-  //   console.log('after uninstall')
-  //   return this._super(...arguments)
-  // },
-  // filesPath: function () {
-  //   console.log('filesPath')
-  //   return this._super(...arguments)
-  // },
-  // normalizeEntityName: function () {
-  //   console.log('normalizeentity name')
-  //   console.log(this._super(...arguments))
-  //   return this._super(...arguments)
-  // },
-
-
   fileMapTokens: function() {
-    // console.log('filemaptokens')
     // Return custom tokens to be replaced in your files
     return {
       __modelToken__: function(options) {
@@ -70,25 +32,25 @@ module.exports = {
   },
 
   locals: function (options) {
-    // console.log('locals')
-    console.log('model', options.model)
     const camelizedModel = S(options.entity.name).camelize().s
     const capitilizedModel = S(camelizedModel).capitalize().s
+    const humanModel = S(camelizedModel).humanize().s
     return {
       components: getComponents(options.target, options.entity.name),
-      newMixinImport: `import NewOrEdit${capitilizedModel}Mixin from '../mixins/routes/new_edit_${options.entity.name}'`,
-      editMixinImport: `import NewOrEdit${capitilizedModel}Mixin from '../../mixins/routes/new_edit_${options.entity.name}'`,
+      newMixinImport: `import NewOrEdit${capitilizedModel}Mixin from '../mixins/routes/new-edit-${options.entity.name}'`,
+      editMixinImport: `import NewOrEdit${capitilizedModel}Mixin from '../../mixins/routes/new-edit-${options.entity.name}'`,
       newEditMixinName: `NewOrEdit${capitilizedModel}Mixin`,
       modelToken: options.entity.name,
       camelizedModel,
-      capitilizedModel
+      capitilizedModel,
+      humanModel,
+      S
     }
   },
   //
   afterInstall: function (options) {
     console.log(`${CONSOLE.WARN}Copy this text to your router.js`)
     console.log(`${CONSOLE.INFO}${generateRouterCode(options.entity.name)}`)
-    // console.log('afterInstall')
   }
 };
 

@@ -1,52 +1,17 @@
-# my-first-blueprint
+# My First Blueprint
+This is a sample project to prove out using an Ember Blueprint to create crud screens based off Ember models.
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+## User Notes:
+- This code will leave `todo-crud` comments in your code that prompt you to check the default implementation
+- By default, will not use format helpers for data types such as dates, numbers, etc.  Will leave to the developer to
+implement
 
-## Prerequisites
-
-You will need the following things properly installed on your computer.
-
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
-* [Bower](https://bower.io/)
-* [Ember CLI](https://ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
-
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd my-first-blueprint`
-* `npm install`
-* `bower install`
-
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+TODO:
+- Move to an add-on
+  - Write tests.  Consider Ember Mirage
+- Consider how we handle hasMany (including many-to-many) relationships
+- Create blueprint to generate config files.  Double check if this is a good idea if we are also generating from db model
+  - Look into this https://stackoverflow.com/a/44668632/403264
+- Update the router directly using Richie's idea (see https://github.com/ember-cli/ember-router-generator and
+https://github.com/ash-framework/cli/blob/master/lib/commands/ash-generate.js#L131)
+- Add in command-line option to use or not display helpers

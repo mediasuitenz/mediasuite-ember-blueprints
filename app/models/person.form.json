@@ -9,11 +9,11 @@
     "type": "number"
   },
   {
-    "key": "permission",
+    "key": "role",
     "type": "belongsTo",
-    "options": "permissions",
-    "relatedModel": "permission",
+    "options": "roles",
+    "relatedModel": "role",
     "valueKey": "id",
-    "labelName": "name"
+    "labelName": "description"
   }
 ]
