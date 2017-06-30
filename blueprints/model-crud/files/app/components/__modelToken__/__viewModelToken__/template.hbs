@@ -1,0 +1,15 @@
+<div class="heading-cols margin-btm-20">
+  <h2 class="heading-left"><%=humanModel%></h2>
+
+  <!-- todo-crud: Consider if you want to permission check the link to allow editing -->
+  {{!--#if (can 'edit')--}}
+    {{#link-to '<%=camelizedModel%>.edit' <%=camelizedModel%> class="button heading-right"}}Edit <%=humanModel%>{{/link-to}}
+  {{!--/if--}}
+</div>
+<!-- todo-crud: Consider adding format helpers here -->
+<%components.forEach(function(component) {%>
+<div class="key-value-wrap margin-btm-20">
+  <div class="key"><%=S(component.label || component.key).humanize().capitalize().s%></div>
+  <div class="value">{{<%=camelizedModel%>.<%=component.key%>}}</div>
+</div>
+<%})%>

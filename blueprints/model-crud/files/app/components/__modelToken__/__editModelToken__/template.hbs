@@ -1,0 +1,55 @@
+<div class="heading-cols margin-btm-20">
+  <h2 class="heading-left">
+    <!-- todo-crud: consider changing the 'id' property to whatever makes sense for the user -->
+    {{if <%=camelizedModel%>.isNew 'Add <%=humanModel%>' (concat 'Edit <%=humanModel%> #' <%=camelizedModel%>.id)}}
+  </h2>
+</div>
+<section>
+<%
+  <!-- todo-crud: Your layout will vary -->
+components.forEach(function(component) { %>
+  <div class="row">
+    <div class="col-1-1 form-field">
+  <%switch (component.type) {
+    case 'text': %>
+      {{mediasuite-input
+        value=<%=camelizedModel%>.<%=component.key%>
+        type='text'
+        label='<%=S(component.label || component.key).humanize().capitalize().s%>'
+        update=(action (mut <%=camelizedModel%>.<%=component.key%>))
+        errors=<%=camelizedModel%>.errors.<%=component.key%>
+      }}
+      <%
+      break;
+
+    case 'number': %>
+      {{mediasuite-input
+        value=<%=camelizedModel%>.<%=component.key%>
+        type='number'
+        label='<%=S(component.label || component.key).humanize().capitalize().s%>'
+        update=(action (mut <%=camelizedModel%>.<%=component.key%>))
+        errors=<%=camelizedModel%>.errors.<%=component.key%>
+      }}
+      <%
+      break;
+
+    case 'belongsTo': %>
+      {{mediasuite-select-box
+        options=<%=component.options%>
+        optionValuePath='<%=component.valueKey%>'
+        optionLabelPath='<%=component.labelKey%>'
+        value=<%=component.key%>
+        label='<%=S(component.label || component.key).humanize().capitalize().s%>'
+        prompt=true
+        promptIsSelectable=true
+        errors=<%=camelizedModel%>.errors.<%=component.key%>Id
+        mutUpdate=true
+        mutField=<%=camelizedModel%>.<%=component.key%>
+      }}
+    <%
+  }%>
+    </div>
+  </div>
+<%})
+%>
+</section>
