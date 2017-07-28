@@ -1,0 +1,25 @@
+[
+  {
+    "key": "title",
+    "type": "text",
+    "label": "Book Title"
+  },
+  {
+    "key": "synopsis",
+    "type": "textarea",
+    "label": "Brief Overview of the Book"
+  },
+  {
+    "key": "rating",
+    "type": "number",
+    "label": "Critical Rating (0 - 100)"
+  },
+  {
+    "key": "author",
+    "type": "belongsTo",
+    "options": "authors",
+    "relatedModel": "author",
+    "valueKey": "id",
+    "labelKey": "name"
+  }
+]
