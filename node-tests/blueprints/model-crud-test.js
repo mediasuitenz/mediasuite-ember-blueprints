@@ -3,11 +3,12 @@
 
 const blueprintHelpers = require('ember-cli-blueprint-test-helpers/helpers');
 const ember = require('ember-cli-blueprint-test-helpers/lib/helpers/ember');
-const { setupTestHooks, emberNew } = blueprintHelpers;
+const { setupTestHooks, emberNew, modifyPackages } = blueprintHelpers;
 
 const expect = require('ember-cli-blueprint-test-helpers/chai').expect;
 const fs = require('fs-extra')
 const path = require('path')
+const { exec } = require('child_process');
 
 describe('Acceptance: ember generate and destroy model-crud', function() {
 
@@ -19,6 +20,7 @@ describe('Acceptance: ember generate and destroy model-crud', function() {
   setupTestHooks(this);
 
   it('model-crud book', function() {
+    this.timeout(10 * 60 * 1000) // 10 minutes
     const dummy = path.join(thisPath, 'tests', 'dummy')
 
     // pass any additional command line options in the arguments array
@@ -36,7 +38,17 @@ describe('Acceptance: ember generate and destroy model-crud', function() {
         fs.copySync(path.join(dummy, 'tests'), path.join(process.cwd(), 'tests'))
         fs.copySync(path.join(dummy, 'testem.js'), path.join(process.cwd(), 'testem.js'))
 
-        // todo: npm install
+        // yarn install
+        // Note: in local tests yarn is about 3x faster than npm
+        modifyPackages([{name: 'mediasuite-ember-blueprints', delete: true}])
+        return new Promise((resolve, reject) => exec('yarn install', (err) => {
+          if (err) {
+            console.error(err)
+            return reject(err)
+          }
+          modifyPackages([{name: 'mediasuite-ember-blueprints', dev: true}])
+          return resolve()
+        }))
       })
       .then(() => {
         // todo: Generate the Blueprint instance
