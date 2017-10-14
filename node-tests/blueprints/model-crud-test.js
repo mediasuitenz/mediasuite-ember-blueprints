@@ -1,9 +1,9 @@
-/* global require, describe, it, process */
+/* global require, describe, it, process, console */
 'use strict';
 
 const blueprintHelpers = require('ember-cli-blueprint-test-helpers/helpers');
-const setupTestHooks = blueprintHelpers.setupTestHooks;
-const emberNew = blueprintHelpers.emberNew;
+const ember = require('ember-cli-blueprint-test-helpers/lib/helpers/ember');
+const { setupTestHooks, emberNew } = blueprintHelpers;
 
 const expect = require('ember-cli-blueprint-test-helpers/chai').expect;
 const fs = require('fs-extra')
@@ -19,7 +19,7 @@ describe('Acceptance: ember generate and destroy model-crud', function() {
   setupTestHooks(this);
 
   it('model-crud book', function() {
-    const dummyApp = path.join(thisPath, 'tests', 'dummy', 'app')
+    const dummy = path.join(thisPath, 'tests', 'dummy')
 
     // pass any additional command line options in the arguments array
     return emberNew()
@@ -27,21 +27,25 @@ describe('Acceptance: ember generate and destroy model-crud', function() {
         const models = ['book.form.json', 'author.js', 'book.js']
 
         // Copy across our model and model config files
-        models.forEach((file) => fs.copySync(path.join(dummyApp, 'models', file), path.join(process.cwd(), 'app', 'models', file)))
+        models.forEach((file) => fs.copySync(path.join(dummy, 'app', 'models', file), path.join(process.cwd(), 'app', 'models', file)))
 
         // copy across the router
-        fs.copySync(path.join(dummyApp, 'router.js'), path.join(process.cwd(), 'app', 'router.js'))
+        fs.copySync(path.join(dummy, 'app', 'router.js'), path.join(process.cwd(), 'app', 'router.js'))
 
-        // npm install
+        // copy across the tests and testem
+        fs.copySync(path.join(dummy, 'tests'), path.join(process.cwd(), 'tests'))
+        fs.copySync(path.join(dummy, 'testem.js'), path.join(process.cwd(), 'testem.js'))
+
+        // todo: npm install
       })
       .then(() => {
-        // Generate the Blueprint instance
+        // todo: Generate the Blueprint instance
       })
       .then(() => {
-        // Run ember tests
+        // todo: Run ember tests
       })
       .finally(() => {
-        // Tear down the tests
+        // todo: Tear down the tests
       })
   });
 });
