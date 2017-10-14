@@ -3,7 +3,7 @@
 
 const blueprintHelpers = require('ember-cli-blueprint-test-helpers/helpers');
 const ember = require('ember-cli-blueprint-test-helpers/lib/helpers/ember');
-const { setupTestHooks, emberNew, modifyPackages } = blueprintHelpers;
+const { setupTestHooks, emberNew, emberGenerate, modifyPackages } = blueprintHelpers;
 
 const expect = require('ember-cli-blueprint-test-helpers/chai').expect;
 const fs = require('fs-extra')
@@ -51,7 +51,8 @@ describe('Acceptance: ember generate and destroy model-crud', function() {
         }))
       })
       .then(() => {
-        // todo: Generate the Blueprint instance
+        // Generate the Blueprint instance
+        return emberGenerate(['model-crud', 'book'])
       })
       .then(() => {
         // todo: Run ember tests
