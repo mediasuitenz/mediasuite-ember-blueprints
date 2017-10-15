@@ -55,10 +55,9 @@ describe('Acceptance: ember generate and destroy model-crud', function() {
         return emberGenerate(['model-crud', 'book'])
       })
       .then(() => {
-        // todo: Run ember tests
-      })
-      .finally(() => {
-        // todo: Tear down the tests
+        // Run ember tests
+        // See https://github.com/ember-cli/ember-cli/blob/master/tests/helpers/ember.js#L29
+        return ember(['test'])
       })
   });
 });
