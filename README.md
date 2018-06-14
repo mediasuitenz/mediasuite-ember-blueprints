@@ -1,5 +1,7 @@
 # mediasuite-ember-blueprints
 
+This repo is used in the [https://www.mediasuite.co.nz/blog/ember-blueprints/](https://www.mediasuite.co.nz/blog/ember-blueprints/) series of blog articles.
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
